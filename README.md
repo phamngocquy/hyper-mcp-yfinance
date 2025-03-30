@@ -3,7 +3,7 @@
 A [hyper-mcp](https://github.com/tuananh/hyper-mcp) plugin that retrieves stock pricing info from yahoo finance.
 
 <p align="center">
-  <img src="./assets/yfinance.png" style="height: 300px;">
+  <img src="./assets/yfinance.png">
 </p>
 
 ## Usage
