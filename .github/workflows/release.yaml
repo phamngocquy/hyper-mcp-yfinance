@@ -3,8 +3,8 @@ on:
   release:
     types: [published]
   push:
-    branches:
-      - main
+    tags:
+      - "*"
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -34,7 +34,7 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=sha,format=short
-            type=raw,value=latest,enable=${{ github.event_name == 'release' && github.event.release.prerelease == false }}
+            type=raw,value=latest,enable=true
       - name: Build and push Docker image (Multi-Arch)
         uses: docker/build-push-action@v5
         with:
