@@ -36,6 +36,7 @@ func _Call() int32 {
 	return 0
 }
 
+//export describe
 func _Describe() int32 {
 	var err error
 	_ = err

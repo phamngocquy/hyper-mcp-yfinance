@@ -35,27 +35,29 @@ func Call(input CallToolRequest) (CallToolResult, error) {
 	return result, nil
 }
 
-func Describe() ([]byte, error) {
-	desc := map[string]interface{}{
-		"name":        "hyper-mcp-yfinance",
-		"description": "Stock pricing from Yahoo Finance",
-		"version":     "1.0.0",
-		"schema": map[string]interface{}{
-			"type": "object",
-			"properties": map[string]interface{}{
-				"symbol": map[string]interface{}{
-					"type":        "string",
-					"description": "Stock ticker symbol, e.g., AAPL or NVDA.",
-				},
-				"interval": map[string]interface{}{
-					"type":        "string",
-					"description": "Time range interval for data aggregation; supports '1d' and '5d'. Default is '1d'.",
+func Describe() (ListToolsResult, error) {
+	return ListToolsResult{
+		Tools: []ToolDescription{
+			{
+				Name:        "yfinance",
+				Description: "Get Stock price from Yahoo Finance",
+				InputSchema: map[string]interface{}{
+					"type":     "object",
+					"required": []string{"symbol"},
+					"properties": map[string]interface{}{
+						"symbol": map[string]interface{}{
+							"type":        "string",
+							"description": "stock symbol ticker, eg: NVDA, AAPL",
+						},
+						"interval": map[string]interface{}{
+							"type":        "string",
+							"description": "Time range interval for data aggregation, support: 1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd. Default is: 1d.",
+						},
+					},
 				},
 			},
-			"required": []string{"symbol"},
 		},
-	}
-	return json.Marshal(desc)
+	}, nil
 }
 
 func createErrorResult(message string) CallToolResult {
