@@ -35,7 +35,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=sha,format=short
             type=raw,value=latest,enable=${{ github.event_name == 'release' && github.event.release.prerelease == false }}
-      - name: Build and push Docker image
+      - name: Build and push Docker image (Multi-Arch)
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -44,5 +44,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64 # Enables multi-arch build
           build-args: |
             BUILDVCS=false
