@@ -1,4 +1,4 @@
-module github.com/extism/go-pdk-template
+module hyper-mcp-yfinance
 
 go 1.22
 
